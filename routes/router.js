@@ -4,11 +4,11 @@ const controller=require("../controllers/documentController")
 const authController=require("../controllers/authController")
 
 
-router.route("/")
+router.route("/document")
 .get(controller.get)
 .post(controller.post)
 
-router.route("/account")
+router.route("/signup")
 .post(authController.post)
 
 router.route("/login")

@@ -42,10 +42,11 @@ const enregistrerDocument = async (hash, owner, timestamp) => {
     await gateway.disconnect();
 };
 module.exports = {
-    // POST /document => enregistrer un document
+    // POST / => enregistrer un document
     post: async (req, res) => {
         const { hash } = req.body;
         const owner= req.session.user.username
+        console.log(owner)
         const now = new Date();
         const timestamp = now.toLocaleString('fr-FR', {
             day: '2-digit',
@@ -69,9 +70,10 @@ module.exports = {
         const { hash } = req.query;
         try {
             const result = await consulterDocument(hash);
+            console.log(result)
             res.status(200).json(JSON.parse(result));
         } catch (error) {
-            res.status(404).json({ error: `❌ Document introuvable ou erreur : ${error.message}` });
+            res.status(404).json({ error: `Document introuvable ou erreur : ${error.message}` });
         }
     },
     getSess: async (req, res) => {

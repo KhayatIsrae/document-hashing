@@ -34,7 +34,7 @@ const register = async (email, password, username) => {
     return { message: 'Utilisateur enregistré avec succès.' };
 };
 
-// 🔐 Fonction de connexion
+// Fonction de connexion
 const login = async (email, password) => {
     const hashedPassword = hashPassword(password);
 

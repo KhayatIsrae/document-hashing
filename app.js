@@ -7,10 +7,7 @@ const session = require("express-session")
 const cors = require("cors")
 const PATH=require('path')
 
-app.use(cors({
-    origin: 'http://127.0.0.1:5500', // ou le port de ton Live Server
-    credentials: true
-}))
+app.use(cors())
 app.use(express.json());
 app.use(express.static(PATH.join(__dirname, 'gui')));
 
