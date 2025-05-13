@@ -44,7 +44,8 @@ const enregistrerDocument = async (hash, owner, timestamp) => {
 module.exports = {
     // POST /document => enregistrer un document
     post: async (req, res) => {
-        const { hash, owner } = req.body;
+        const { hash } = req.body;
+        const owner= req.session.user.username
         const now = new Date();
         const timestamp = now.toLocaleString('fr-FR', {
             day: '2-digit',
@@ -57,9 +58,9 @@ module.exports = {
         });
         try {
             await enregistrerDocument(hash, owner, timestamp);
-            res.status(200).json({ message: '✅ Document enregistré avec succès.' });
+            res.status(200).json({ message: 'Document enregistré avec succès.' });
         } catch (error) {
-            res.status(500).json({ error: `❌ Erreur : ${error.message}` });
+            res.status(500).json({ error: `Erreur : ${error.message}` });
         }
     },
 
@@ -72,5 +73,13 @@ module.exports = {
         } catch (error) {
             res.status(404).json({ error: `❌ Document introuvable ou erreur : ${error.message}` });
         }
+    },
+    getSess: async (req, res) => {
+        if (!req.session.user || req.session.user == "") {
+            res.json({ connected: false });
+        } else {
+            res.json({ connected: true });
+        }
+
     }
 };
