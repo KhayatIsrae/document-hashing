@@ -1,6 +1,7 @@
 const { Gateway, Wallets } = require('fabric-network');
 const fs = require('fs');
 const path = require('path');
+const nodemailer = require('nodemailer')
 
 let contract = ''
 let gateway = ''
@@ -45,9 +46,15 @@ module.exports = {
     // POST / => enregistrer un document
     post: async (req, res) => {
         const { hash } = req.body;
-        const owner= req.session.user.username
-        console.log(owner)
+
+        if (!req.session.user) {
+            return res.status(401).json({ error: 'Utilisateur non authentifié.' });
+        }
+
+        const owner = req.session.user.username;
+        const email = req.session.user.email
         const now = new Date();
+
         const timestamp = now.toLocaleString('fr-FR', {
             day: '2-digit',
             month: '2-digit',
@@ -57,14 +64,52 @@ module.exports = {
             second: '2-digit',
             hour12: false
         });
+
         try {
-            await enregistrerDocument(hash, owner, timestamp);
-            res.status(200).json({ message: 'Document enregistré avec succès.' });
+            let exists = false;
+            try {
+                const doc = await consulterDocument(hash);
+                if (doc) exists = true;
+            } catch (e) {
+                // Si l’erreur vient du fait que le document n’existe pas → on continue
+                if (!e.message.includes("aucun document trouve avec le hash")) {
+                    // Sinon, c’est une vraie erreur qu’on doit remonter
+                    throw e;
+                }
+            }
+
+            if (exists) {
+                return res.status(400).json({ error: 'Ce document est déjà enregistré.' });
+            }
+
+            // Sinon on enregistre
+            try {
+                await enregistrerDocument(hash, owner, timestamp);
+                const transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: '', // l'adresse Gmail
+                        pass: '' // Le mot de passe généré dans Google
+                    }
+                });
+                // Envoi de l’e-mail
+                const info = await transporter.sendMail({
+                    from: '<noreply@docchain.com>',
+                    to: email,
+                    subject: 'Confirmation d’enregistrement du document',
+                    text: `Bonjour ${owner},\n\nVotre document a bien été enregistré.\n\nHash : ${hash}\nDate : ${timestamp}\n\nMerci d’avoir utilisé notre service.`
+                });
+
+                res.status(200).json({ message: 'Document enregistré et email de confirmation envoyé.' });
+            } catch (error) {
+                console.error(error);
+                res.status(500).json({ error: `Erreur : ${error.message}` });
+            }
+
         } catch (error) {
-            res.status(500).json({ error: `Erreur : ${error.message}` });
+            res.status(500).json({ error: `Erreur serveur : ${error.message}` });
         }
     },
-
     // GET /document?hash=... => consulter un document
     get: async (req, res) => {
         const { hash } = req.query;
@@ -73,7 +118,7 @@ module.exports = {
             console.log(result)
             res.status(200).json(JSON.parse(result));
         } catch (error) {
-            res.status(404).json({ error: `Document introuvable ou erreur : ${error.message}` });
+            res.status(404).json({ message: `Document introuvable ou erreur : ${error.message}` });
         }
     },
     getSess: async (req, res) => {
