@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- ✅ Header avec bouton de déconnexion -->
+  <header style="background-color: #f0f0f0; padding: 10px; text-align: right;">
+    <button id="logoutBtn" style="padding: 5px 10px;">Se déconnecter</button>
+  </header>
+
+  <div class="container">
+    <h2>Bienvenue</h2>
+    <div class="actions">
+      <button id="registerButton">Enregistrer un document</button>
+      <a href="verifier.html"><button>Vérifier un document</button></a>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const res = await fetch('http://localhost:3000/session', {
+        method: 'GET',
+        credentials: 'include'
+      });
+      const data = await res.json();
+      console.log(data.connected);
+
+      const registerBtn = document.getElementById('registerButton');
+      registerBtn.addEventListener('click', () => {
+        if (data.connected) {
+          window.location.href = 'enregistrer.html';
+        } else {
+          window.location.href = 'login.html';
+        }
+      });
+
+      // 🔴 Déconnexion
+      const logoutBtn = document.getElementById('logoutBtn');
+      logoutBtn.addEventListener('click', async () => {
+        await fetch('http://localhost:3000/logout', {
+          method: 'GET',
+          credentials: 'include'
+        });
+        window.location.href = 'login.html';
+      });
+    });
+  </script>
+</body>
+
+</html>

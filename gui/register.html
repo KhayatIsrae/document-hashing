@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Inscription</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Inscription</h2>
+    <form id="registerForm">
+      <input type="text" name="username" id="username" placeholder="Nom d'utilisateur" required>
+      <input type="email" name="email" id="email" placeholder="Email" required>
+      <input type="password" name="password" id="password" placeholder="Mot de passe" required>
+      <button type="submit">S'inscrire</button>
+      <div class="link">Déjà inscrit ? <a href="login.html">Connexion</a></div>
+      <div id="error" style="color:red; margin-top:10px;"></div>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('registerForm');
+    const errorDiv = document.getElementById('error');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      try {
+        const response = await fetch('http://localhost:3000/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // redirection après inscription réussie
+          window.location.href = 'login.html';
+        } else {
+          errorDiv.textContent = data.error || "Erreur lors de l'inscription.";
+        }
+      } catch (err) {
+        errorDiv.textContent = "Erreur de connexion au serveur.";
+      }
+    });
+  </script>
+</body>
+</html>
