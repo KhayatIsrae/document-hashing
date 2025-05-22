@@ -88,16 +88,16 @@ module.exports = {
                 const transporter = nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
-                        user: '', // l'adresse Gmail
-                        pass: '' // Le mot de passe généré dans Google
+                        user: 'noreply.documenthashing@gmail.com', // l'adresse Gmail
+                        pass: 'pqmw ndam ogmu xyly' // Le mot de passe généré dans Google
                     }
                 });
                 // Envoi de l’e-mail
                 const info = await transporter.sendMail({
-                    from: '<noreply@docchain.com>',
+                    from: '<noreply@docLedger.com>',
                     to: email,
                     subject: 'Confirmation d’enregistrement du document',
-                    text: `Bonjour ${owner},\n\nVotre document a bien été enregistré.\n\nHash : ${hash}\nDate : ${timestamp}\n\nMerci d’avoir utilisé notre service.`
+                    text: `Bonjour ${owner},\n\nVotre document a bien été enregistré.\n\nHash : ${hash}\nDate : ${timestamp}\n\nMerci d’avoir utilisé notre service docLedger.`
                 });
 
                 res.status(200).json({ message: 'Document enregistré et email de confirmation envoyé.' });

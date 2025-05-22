@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription - DocLedger</title>
+  <link rel="icon" href="images/logo.png">
+  <link rel="stylesheet" href="style/loginStyle.css">
+  <script src="scripts/register.js" defer></script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+        <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
+      <span>DocLedger</span>
+    </div>
+  </header>
+
+  <!-- Formulaire d'inscription -->
+  <div class="login-wrapper">
+    <div class="login-box">
+      <h2>Créer un compte</h2>
+      <form id="registerForm">
+        <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+        <input type="email" name="email" placeholder="Adresse e-mail" required>
+        <input type="password" name="password" placeholder="Mot de passe" required>
+        <input type="password" name="valPassword" placeholder="validation de mot de passe" required>
+        <button type="submit">S'inscrire</button>
+      </form>
+      <p class="signup-link">Déjà un compte ? <a href="login.html">Connectez-vous</a></p>
+      <div id="error" class="error-message"></div>
+    </div>
+  </div>
+
+</body>
+</html>

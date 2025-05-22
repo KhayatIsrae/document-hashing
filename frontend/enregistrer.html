@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vérifier un Document - DocLedger</title>
+    <link rel="icon" href="images/logo.png">
+    <link rel="stylesheet" href="style/verifierStyle.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="scripts/enregistrer.js" defer></script>
+</head>
+
+<body>
+
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
+            <span>DocLedger</span>
+        </div>
+        <button class="login-button" id="login-button"></button>
+    </header>
+
+    <!-- Zone centrale d'enregistrement -->
+    <section id="enregistrer-section" class="verifier-section">
+        <h1>Enregistrer un document</h1>
+        <form id="verifyForm">
+            <label for="hashFile">Importer un fichier :</label>
+            <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.txt" required>
+            <button type="submit">Enregistrer</button>
+        </form>
+        <div id="result"></div>
+    </section>
+    <div class="switch-section">
+        <p>Vous souhaitez plutôt <a  href="verifier.html">verifier un document ?</a></p>
+      </div>
+    <!-- Section descriptive -->
+    <section class="description-section">
+        <div class="description-text">
+            <h2>Qu’est-ce que la vérification via blockchain ?</h2>
+            <p>
+                En utilisant Hyperledger Fabric, DocLedger vous permet de valider l’origine et l’intégrité d’un document
+                en un seul clic.
+                Chaque enregistrement est horodaté et signé de manière immuable pour garantir sa véracité.
+            </p>
+        </div>
+        <img src="images/ChatGPT Image May 17, 2025, 10_26_45 PM.png" alt="Illustration Blockchain">
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-left">
+            <img src="images/logo.png" alt="Logo">
+            <span>DocLedger</span>
+        </div>
+        <div class="footer-right">
+            <h3>Contact</h3>
+            <p>contact@docledger.app</p>
+            <p>+33 1 23 45 67 89</p>
+            <p>123 rue de la Blockchain, Paris</p>
+            <div class="socials">
+                <a href="#"><img src="images/linkedin.jpeg" alt="LinkedIn"></a>
+                <a href="#"><img src="images/facebook.jpeg" alt="Facebook"></a>
+                <a href="#"><img src="images/instagram.jpeg" alt="Instagram"></a>
+            </div>
+        </div>
+    </footer>
+    <div id="loader" class="loader hidden"></div>
+</body>
+
+</html>

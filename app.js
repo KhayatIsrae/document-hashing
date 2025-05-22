@@ -5,11 +5,11 @@ const PORT = 3000
 const router = require("./routes/router")
 const session = require("express-session")
 const cors = require("cors")
-const PATH=require('path')
+const PATH = require('path')
 
 app.use(cors())
 app.use(express.json());
-app.use(express.static(PATH.join(__dirname, 'gui')));
+app.use(express.static(PATH.join(__dirname, 'frontend')));
 
 app.use(session({
     secret: 'secret',
