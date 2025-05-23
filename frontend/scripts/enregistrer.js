@@ -7,6 +7,31 @@ const connected = async () => {
 };
 
 (async () => {
+    const success = localStorage.getItem('loginSuccess');
+    if (success === 'true') {
+        localStorage.removeItem('loginSuccess');
+
+        // Affichage du message (ex. en haut de la page)
+        const messageDiv = document.createElement('div');
+        messageDiv.textContent = 'Connecté avec succès !';
+        messageDiv.style.position = 'fixed';
+        messageDiv.style.top = '20px';
+        messageDiv.style.right = '20px';
+        messageDiv.style.backgroundColor = '#22c55e';
+        messageDiv.style.color = 'white';
+        messageDiv.style.padding = '12px 20px';
+        messageDiv.style.borderRadius = '8px';
+        messageDiv.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
+        messageDiv.style.zIndex = '999';
+
+        document.body.appendChild(messageDiv);
+
+        // Disparaît après 4s
+        setTimeout(() => {
+            messageDiv.remove();
+        }, 4000);
+    }
+
     const isConnected = await connected();
     console.log(isConnected);
     if (isConnected) {
@@ -21,6 +46,9 @@ const connected = async () => {
         });
 
     } else {
+        loginButton.textContent = 'se connecter'
+        loginButton.setAttribute('class', 'loginBtn')
+        localStorage.setItem('redirectAfterLogin', 'enregistrer.html');
         window.location.href = 'login.html';
     }
 })();

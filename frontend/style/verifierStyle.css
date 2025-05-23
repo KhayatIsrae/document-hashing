@@ -327,13 +327,75 @@ footer .socials a img {
 
 
 @media (max-width: 768px) {
-    .description {
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+    }
+
+    .logo {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    #login-button {
+        margin-top: 0;
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+
+    .verifier-section h1 {
+        font-size: 22px;
+        padding: 0 15px;
+    }
+
+    .verifier-section form {
         flex-direction: column;
+        gap: 10px;
+        padding: 0 15px;
+    }
+
+    #verifyForm input[type="file"],
+    .verifier-section input[type="text"] {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .verifier-section button {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .description-section {
+        flex-direction: column;
+        padding: 40px 20px;
         text-align: center;
     }
 
     .description-text,
-    .description img {
+    .description-section img {
         max-width: 100%;
+    }
+
+    .description-text h2 {
+        font-size: 22px;
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 30px 20px;
+    }
+
+    .logo img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .logo span {
+        font-size: 18px;
     }
 }

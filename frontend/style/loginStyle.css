@@ -193,26 +193,48 @@ header.header {
 
 @media (max-width: 768px) {
     header.header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 15px 20px;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
     }
-
+  
+    .logo {
+      flex-direction: row;
+      align-items: center;
+    }
+  
     .logo img {
-        width: 45px;
-        height: 45px;
+      width: 45px;
+      height: 45px;
     }
-
+  
     .logo span {
-        font-size: 18px;
+      font-size: 18px;
     }
-
+  
     .login-wrapper {
-        padding: 100px 20px 40px 20px;
+      padding-top: 100px;
+      padding-left: 15px;
+      padding-right: 15px;
     }
-
+  
     .login-box {
-        width: 100%;
-        padding: 25px;
+      width: 100%;
+      padding: 25px;
+      margin: 0 auto;
+      box-sizing: border-box;
     }
-}
+  
+    .login-box input,
+    .login-box button {
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  
+    .signup-link {
+      font-size: 13px;
+    }
+  }
+  

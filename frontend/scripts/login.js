@@ -19,7 +19,15 @@ form.addEventListener('submit', async (e) => {
     const data = await res.json();
 
     if (res.ok) {
-      window.location.href = 'index.html';
+      localStorage.setItem('loginSuccess', 'true');
+      const redirectPage = localStorage.getItem('redirectAfterLogin');
+      console.log(redirectPage)
+      if (redirectPage) {
+        localStorage.removeItem('redirectAfterLogin');
+        window.location.href = redirectPage;
+      } else {
+        window.location.href = 'index.html';
+      }
     } else {
       errorDiv.textContent = data.error || "Erreur lors de la connexion.";
     }

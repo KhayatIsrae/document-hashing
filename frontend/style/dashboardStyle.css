@@ -5,6 +5,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -204,9 +205,21 @@ footer .socials a img {
 
 @media (max-width: 768px) {
   header {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     padding: 15px 20px;
+  }
+
+  .logo {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #login-button {
+    margin-top: 0;
+    padding: 8px 14px;
+    font-size: 14px;
   }
 
   .hero {
@@ -215,20 +228,26 @@ footer .socials a img {
     text-align: center;
   }
 
-  .hero-left,
-  .description-text {
+  .hero-left {
     max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .hero-left h1 {
+    font-size: 24px;
   }
 
   .hero-buttons {
     justify-content: center;
     flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
   }
 
-  .hero img,
-  .description-section img {
-    max-width: 100%;
+  .hero img {
+    max-width: 90%;
     height: auto;
+    margin-top: 20px;
   }
 
   .description-section {
@@ -237,15 +256,25 @@ footer .socials a img {
     text-align: center;
   }
 
+  .description-text h2 {
+    font-size: 22px;
+  }
+
+  .description-text p {
+    font-size: 14px;
+  }
+
+  .description-section img {
+    max-width: 90%;
+    height: auto;
+    margin-top: 20px;
+  }
+
   footer {
     flex-direction: column;
     align-items: center;
     text-align: center;
-  }
-
-  .login-box {
-    width: 90%;
-    padding: 20px;
+    padding: 30px 20px;
   }
 
   .logo img {
@@ -257,4 +286,3 @@ footer .socials a img {
     font-size: 18px;
   }
 }
-
