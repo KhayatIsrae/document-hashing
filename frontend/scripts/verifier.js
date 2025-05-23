@@ -55,11 +55,9 @@ const connected = async () => {
         const data = await res.json();
         return data.connected;
     } catch (err) {
-        resultDiv.setAttribute('class', 'errormsg')
-        resultDiv.textContent = ` ${err.message}`;
-        console.log(err)
+        console.error("Erreur lors de la vérification de session :", err);
+        return false;
     }
-
 };
 
 (async () => {

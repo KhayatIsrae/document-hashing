@@ -1,10 +1,16 @@
 
 const loginButton = document.getElementById('login-button');
 const connected = async () => {
-    const res = await fetch('http://localhost:3000/session');
-    const data = await res.json();
-    return data.connected;
+    try {
+        const res = await fetch('http://localhost:3000/session');
+        const data = await res.json();
+        return data.connected;
+    } catch (err) {
+        console.error("Erreur lors de la vérification de session :", err);
+        return false;
+    }
 };
+
 
 (async () => {
     const success = localStorage.getItem('loginSuccess');
