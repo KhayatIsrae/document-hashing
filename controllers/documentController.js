@@ -97,7 +97,7 @@ module.exports = {
                     from: '<noreply@docLedger.com>',
                     to: email,
                     subject: 'Confirmation d’enregistrement du document',
-                    text: `Bonjour ${owner},\n\nVotre document a bien été enregistré.\n\nHash : ${hash}\nDate : ${timestamp}\n\nMerci d’avoir utilisé notre service docLedger.`
+                    html: `<p>Bonjour <strong>${owner}</strong>,<br><br>Votre document a bien été enregistré.<br><br>Hash : ${hash}<br>Date : ${timestamp}<br><br><em>Merci d’avoir utilisé notre service docLedger.</em>`
                 });
 
                 res.status(200).json({ message: 'Document enregistré et email de confirmation envoyé.' });

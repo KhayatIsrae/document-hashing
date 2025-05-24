@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,13 +14,13 @@
   <!-- Header -->
   <header class="header">
     <div class="logo">
-        <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
+      <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
       <span>DocLedger</span>
     </div>
   </header>
 
   <!-- Formulaire d'inscription -->
-  <div class="login-wrapper">
+  <div class="login-wrapper" id="login-wrapper">
     <div class="login-box">
       <h2>Créer un compte</h2>
       <form id="registerForm">
@@ -29,10 +30,20 @@
         <input type="password" name="valPassword" placeholder="validation de mot de passe" required>
         <button type="submit">S'inscrire</button>
       </form>
+      <div id="otp-section" class="hidden">
+        <input type="text" id="otp-input" placeholder="Entrez le code de vérification envoyé à votre adresse e-mail." />
+        <p style="cursor: pointer;" id="renvoyer">renvoyer le code</p>
+        <button id="otp-validate-btn">Valider le code</button>
+      </div>
+
       <p class="signup-link">Déjà un compte ? <a href="login.html">Connectez-vous</a></p>
       <div id="error" class="error-message"></div>
+
     </div>
   </div>
+  <div class="hidden" id="messageDiv">code renvoyé!</div>
+  <div id="loader" class="hidden loader"></div>
 
 </body>
+
 </html>
