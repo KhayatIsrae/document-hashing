@@ -156,6 +156,36 @@ header {
     transform: scale(1.03);
 }
 
+.copyable {
+    position: relative;
+    cursor: pointer;
+    text-decoration: underline dashed;
+}
+
+.copyable::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1f2937;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    font-size: 12px;
+    transition: opacity 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.copyable:hover::after {
+    opacity: 1;
+}
+
+
 /* Style pour les messages d'erreur */
 .errormsg {
     color: #f87171;
@@ -178,6 +208,11 @@ header {
     border: 1px solid #10b981;
     font-weight: bold;
     animation: fadeIn 0.5s ease-in-out;
+    word-wrap: break-word;
+    /* casse les mots trop longs */
+    overflow-wrap: break-word;
+    /* support étendu */
+    white-space: pre-wrap;
 }
 
 /* Animation douce */
@@ -313,6 +348,13 @@ footer .socials a img {
 
 .hidden {
     display: none;
+}
+
+.blur {
+    filter: blur(4px);
+    pointer-events: none;
+    user-select: none;
+    transition: filter 0.3s ease;
 }
 
 @keyframes spin {

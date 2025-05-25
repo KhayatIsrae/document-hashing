@@ -4,6 +4,25 @@ const loginButton = document.getElementById('login-button');
 const form = document.getElementById('verifyForm');
 const resultDiv = document.getElementById('result');
 const loader = document.getElementById('loader');
+const wrapper = document.getElementById('wrapper');
+
+
+document.addEventListener('click', (e) => {
+    const hashEl = e.target;
+    if (hashEl.classList.contains('copyable')) {
+        const originalText = hashEl.textContent;
+        navigator.clipboard.writeText(originalText).then(() => {
+            hashEl.textContent = "Copié !";
+            hashEl.removeAttribute('data-tooltip');
+            setTimeout(() => {
+                hashEl.textContent = originalText;
+                hashEl.setAttribute('data-tooltip', 'Cliquer pour copier');
+            }, 1500);
+        }).catch(err => {
+            console.error('Erreur de copie :', err);
+        });
+    }
+});
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -24,13 +43,14 @@ form.addEventListener('submit', async (e) => {
     }
     if (document !== '') {
         const URL = `http://localhost:3000/document?hash=${document}`
+        wrapper.classList.add('blur');
         loader.classList.remove('hidden');
         fetch(URL).then(res => res.json()).then(data => {
             if (!data.message) {
                 resultDiv.setAttribute('class', 'resultmsg')
                 resultDiv.innerHTML = `
           <strong>Document trouvé :</strong><br>
-          Hash : ${data.hash}<br>
+          Hash : <span id="hashText" class="copyable" data-tooltip="Copier">${data.hash}</span><br>
           Auteur : ${data.owner}<br>
           Date : ${data.timestamp}<br>
         `;
@@ -44,6 +64,7 @@ form.addEventListener('submit', async (e) => {
             resultDiv.textContent = ` ${err.message}`;
             console.log(err)
         }).finally(() => {
+            wrapper.classList.remove('blur');
             loader.classList.add('hidden')
         })
     }

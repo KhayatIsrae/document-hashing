@@ -115,7 +115,6 @@ module.exports = {
         const { hash } = req.query;
         try {
             const result = await consulterDocument(hash);
-            console.log(result)
             res.status(200).json(JSON.parse(result));
         } catch (error) {
             res.status(404).json({ message: `Document introuvable ou erreur : ${error.message}` });

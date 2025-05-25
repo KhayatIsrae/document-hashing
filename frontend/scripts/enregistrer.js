@@ -1,5 +1,6 @@
-
 const loginButton = document.getElementById('login-button');
+const wrapper = document.getElementById('wrapper');
+
 const connected = async () => {
     try {
         const res = await fetch('http://localhost:3000/session');
@@ -73,6 +74,7 @@ form.addEventListener('submit', async (e) => {
         alert("Veuillez sélectionner un fichier.");
         return;
     }
+    wrapper.classList.add('blur');
     loader.classList.remove('hidden');
     try {
         // Lire le contenu du fichier
@@ -109,7 +111,10 @@ form.addEventListener('submit', async (e) => {
         resultDiv.setAttribute('class', 'errormsg');
         resultDiv.textContent = "Erreur réseau ou serveur.";
     }
-    finally { loader.classList.add('hidden'); }
+    finally {
+        wrapper.classList.remove('blur');
+        loader.classList.add('hidden');
+    }
 
 });
 
