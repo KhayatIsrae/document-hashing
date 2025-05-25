@@ -7,11 +7,11 @@ let contract = ''
 let gateway = ''
 const main = async () => {
     // Charger le fichier de connexion
-    const ccpPath = path.resolve(__dirname, '../../connection', 'connection-org1.json');
+    const ccpPath = path.resolve(__dirname, '../backend/connection', 'connection-org1.json');
     const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
 
     // Charger le wallet
-    const walletPath = path.join(__dirname, '../../wallet');
+    const walletPath = path.join(__dirname, '../backend/wallet');
 
     const wallet = await Wallets.newFileSystemWallet(walletPath);
     const identity = await wallet.get('appUser');
